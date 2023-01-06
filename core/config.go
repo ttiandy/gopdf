@@ -42,7 +42,7 @@ func NewConfig(width, height float64, padingH, padingV float64) (*Config, error)
 }
 
 func (config *Config) GetWidthAndHeight() (width, height float64) {
-	return config.width, config.width
+	return config.width, config.height
 }
 
 // Get pdf page start position, from the position you can write the pdf body content.
@@ -56,15 +56,19 @@ func (config *Config) GetEnd() (x, y float64) {
 
 var defaultConfigs map[string]*Config // page -> config
 
-/**************************************
+/*
+*************************************
 A0 ~ A5 page width and height config:
+
 	'A0': [2383.94, 3370.39],
 	'A1': [1683.78, 2383.94],
 	'A2': [1190.55, 1683.78],
 	'A3': [841.89, 1190.55],
 	'A4': [595.28, 841.89],
 	'A5': [419.53, 595.28],
-***************************************/
+
+**************************************
+*/
 func init() {
 	defaultConfigs = make(map[string]*Config)
 
