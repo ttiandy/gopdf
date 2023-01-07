@@ -35,7 +35,6 @@ func Convert2JPEG(srcPath string, dstPath string) error {
 	if err != nil {
 		return err
 	}
-	reader := bufio.NewReader(fd)
 	defer fd.Close()
 
 	_, pictureType, err := image.DecodeConfig(fd)
@@ -45,7 +44,7 @@ func Convert2JPEG(srcPath string, dstPath string) error {
 
 	switch pictureType {
 	case JPEG:
-
+		reader := bufio.NewReader(fd)
 		dstFile, err := os.Create(dstPath)
 		if err != nil {
 			return err
