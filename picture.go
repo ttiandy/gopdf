@@ -1,19 +1,20 @@
 package gopdf
 
 import (
+	"bufio"
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/jpeg"
 	"image/png"
-	"os"
-	"fmt"
 	"io"
 	"math"
+	"os"
 
 	"golang.org/x/image/bmp"
-	"golang.org/x/image/webp"
 	"golang.org/x/image/tiff"
+	"golang.org/x/image/webp"
 )
 
 const (
@@ -42,11 +43,12 @@ func Convert2JPEG(srcPath string, dstPath string) error {
 
 	switch pictureType {
 	case JPEG:
+		reader := bufio.NewReader(fd)
 		writer, err := os.Create(dstPath)
 		if err != nil {
 			return err
 		}
-		_, err = io.Copy(writer, fd)
+		_, err = io.Copy(writer, reader)
 		return err
 	case PNG:
 		return ConvertPNG2JPEG(srcPath, dstPath)
